@@ -10,7 +10,7 @@ import useOutsideClick from '../../hooks/useOutsideClick';
 import { ConfigContext } from '../../contexts/ConfigContext';
 import * as actionType from '../../store/actions';
 
-const AdminLayout = ({ children }) => {
+const AdminLayout = (props) => {
   const windowSize = useWindowSize();
   const ref = useRef();
   const configContext = useContext(ConfigContext);
@@ -53,13 +53,13 @@ const AdminLayout = ({ children }) => {
 
   let mainContainer = (
     <React.Fragment>
-      <NavBar />
+      <NavBar props={props} />
       <div className="pcoded-main-container">
         <div className={mainClass.join(' ')}>
           <div className="pcoded-content">
             <div className="pcoded-inner-content">
               <Breadcrumb />
-              {children}
+              {props.children}
             </div>
           </div>
         </div>

@@ -5,7 +5,7 @@ const initialState = {
   email: '',
   password: '',
   error: '',
-  user: null
+  user: ''
 };
 
 const reducer = (state = initialState, action) => {
@@ -19,7 +19,8 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         isLoading: false,
-        users: action.payload,
+        user: action.payload.user,
+        email: action.payload.email,
         error: ''
       };
     case FETCH_LOGIN_FAILURE:

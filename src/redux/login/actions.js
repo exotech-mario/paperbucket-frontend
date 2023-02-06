@@ -6,10 +6,10 @@ export const fetchLogin = () => {
   };
 };
 
-export const fetchLoginSuccess = (user) => {
+export const fetchLoginSuccess = (user, email) => {
   return {
     type: FETCH_LOGIN_SUCCESS,
-    payload: user
+    payload: { user, email }
   };
 };
 

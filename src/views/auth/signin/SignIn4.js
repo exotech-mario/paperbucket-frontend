@@ -1,20 +1,19 @@
 import React, { useState } from 'react';
-import { NavLink } from 'react-router-dom';
-import Breadcrumb from '../../../layouts/AdminLayout/Breadcrumb';
-import lock from '../../../assets/images/user/lock.png';
+import { NavLink, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { connect } from 'react-redux';
+import Breadcrumb from '../../../layouts/AdminLayout/Breadcrumb';
+import lock from '../../../assets/images/user/lock.png';
 import { fetchLogin, fetchLoginSuccess, fetchLoginFailure } from '../../../redux/login/actions';
 
 const Signin4 = (props) => {
   console.log(props);
-
   const initialState = {
     isLoading: false,
     email: '',
     password: '',
     error: '',
-    user: null
+    user: ''
   };
 
   // mario@exotech.dk
@@ -30,11 +29,14 @@ const Signin4 = (props) => {
       })
 
       .then((res) => {
-        console.log('res', res);
-        const user = res.value;
-        props.fetchLoginSuccess(user);
+        const user = res.data.value;
+        initialState.user = user;
+        props.fetchLoginSuccess(user, initialState.email);
+
+        props.history.push('/');
       })
       .catch((err) => {
+        initialState.error = err.message;
         console.log('err', err.message);
         props.fetchLoginFailure(err.message);
       });
@@ -42,14 +44,11 @@ const Signin4 = (props) => {
 
   const changeData = (e, input) => {
     initialState[input] = e.target.value;
-
     console.log(initialState);
   };
 
   const submitData = () => {
-    console.log('submit');
     fetchUserAxios();
-    console.log(props.error);
   };
 
   return (
@@ -126,8 +125,8 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     fetchLogin: () => dispatch(fetchLogin()),
-    fetchLoginSuccess: () => dispatch(fetchLoginSuccess()),
-    fetchLoginFailure: () => dispatch(fetchLoginFailure())
+    fetchLoginSuccess: (user, email) => dispatch(fetchLoginSuccess(user, email)),
+    fetchLoginFailure: (err) => dispatch(fetchLoginFailure(err))
   };
 };
 

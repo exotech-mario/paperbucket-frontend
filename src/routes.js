@@ -116,9 +116,10 @@ const routes = [
     component: lazy(() => import('./views/auth/reset-password/ResetPassword1'))
   },
   {
-    exact: true,
-    path: '/auth/reset-password-2',
-    component: lazy(() => import('./views/auth/reset-password/ResetPassword2'))
+    exact: false,
+    path: `/auth/reset`,
+    params: '/token=',
+    component: lazy(() => import('./views/auth/reset-password/ResetPassword1'))
   },
   {
     exact: true,

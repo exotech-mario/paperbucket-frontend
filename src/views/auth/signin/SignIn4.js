@@ -5,7 +5,6 @@ import { connect } from 'react-redux';
 import Breadcrumb from '../../../layouts/AdminLayout/Breadcrumb';
 import lock from '../../../assets/images/user/lock.png';
 import { fetchLogin, fetchLoginSuccess, fetchLoginFailure } from '../../../redux/login/actions';
-
 const Signin4 = (props) => {
   console.log(props);
   const initialState = {

@@ -37,11 +37,22 @@ const menuItems = {
           classes: 'nav-item',
           url: '/auth/reset-password-1'
           // icon: 'feather email'
+        },
+        {
+          id: 'sweet-alert',
+          title: 'Sweet Alert',
+          type: 'item',
+          url: '/advance/sweet-alert'
         }
       ]
     }
   ]
 };
+//
+//
+//
+//
+
 //   items: [
 //     {
 //       id: 'navigation',

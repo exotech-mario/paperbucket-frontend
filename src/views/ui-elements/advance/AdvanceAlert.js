@@ -86,53 +86,69 @@ const AdvanceAlert = () => {
   return (
     <React.Fragment>
       <Row>
-        <Col sm={12}>
-          <ModuleNotification
-            message="For more info please check the components's official documentation"
-            link="https://www.npmjs.com/package/sweetalert2-react-content"
-          />
-        </Col>
-      </Row>
-      <Row>
         <Col>
           <Card>
-            <Card.Header>
-              <Card.Title>Alerts</Card.Title>
-            </Card.Header>
             <Card.Body className="btn-page">
-              <Button onClick={() => sweetAlertHandler({ title: '', type: '', text: 'Hello World!' })}>Basic</Button>
               <Button
                 variant="success"
                 onClick={() => sweetAlertHandler({ title: 'Good job!', type: 'success', text: 'You clicked the button!' })}
               >
                 Success
               </Button>
-              <Button
-                variant="danger"
-                onClick={() => sweetAlertHandler({ title: 'Good job!', type: 'error', text: 'You clicked the button!' })}
-              >
-                Error
-              </Button>
-              <Button
-                variant="warning"
-                onClick={() => sweetAlertHandler({ title: 'Good job!', type: 'warning', text: 'You clicked the button!' })}
-              >
-                Warning
-              </Button>
-              <Button
-                variant="info"
-                onClick={() => sweetAlertHandler({ title: 'Good job!', type: 'info', text: 'You clicked the button!' })}
-              >
-                Info
-              </Button>
-              <Button onClick={sweetConfirmHandler}>Confirm</Button>
-              <Button onClick={sweetPromptHandler}>Prompt</Button>
-              <Button onClick={sweetAjaxHandler}>Ajax</Button>
             </Card.Body>
           </Card>
         </Col>
       </Row>
     </React.Fragment>
+    // <React.Fragment>
+    //   <Row>
+    //     <Col sm={12}>
+    //       <ModuleNotification
+    //         message="For more info please check the components's official documentation"
+    //         link="https://www.npmjs.com/package/sweetalert2-react-content"
+    //       />
+    //     </Col>
+    //   </Row>
+    //   <Row>
+    //     <Col>
+    //       <Card>
+    //         <Card.Header>
+    //           <Card.Title>Alerts</Card.Title>
+    //         </Card.Header>
+    //         <Card.Body className="btn-page">
+    //           <Button onClick={() => sweetAlertHandler({ title: '', type: '', text: 'Hello World!' })}>Basic</Button>
+    //           <Button
+    //             variant="success"
+    //             onClick={() => sweetAlertHandler({ title: 'Good job!', type: 'success', text: 'You clicked the button!' })}
+    //           >
+    //             Success
+    //           </Button>
+    //           <Button
+    //             variant="danger"
+    //             onClick={() => sweetAlertHandler({ title: 'Good job!', type: 'error', text: 'You clicked the button!' })}
+    //           >
+    //             Error
+    //           </Button>
+    //           <Button
+    //             variant="warning"
+    //             onClick={() => sweetAlertHandler({ title: 'Good job!', type: 'warning', text: 'You clicked the button!' })}
+    //           >
+    //             Warning
+    //           </Button>
+    //           <Button
+    //             variant="info"
+    //             onClick={() => sweetAlertHandler({ title: 'Good job!', type: 'info', text: 'You clicked the button!' })}
+    //           >
+    //             Info
+    //           </Button>
+    //           <Button onClick={sweetConfirmHandler}>Confirm</Button>
+    //           <Button onClick={sweetPromptHandler}>Prompt</Button>
+    //           <Button onClick={sweetAjaxHandler}>Ajax</Button>
+    //         </Card.Body>
+    //       </Card>
+    //     </Col>
+    //   </Row>
+    // </React.Fragment>
   );
 };
 

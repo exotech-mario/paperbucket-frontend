@@ -14,8 +14,9 @@ const ResetPassword1 = (props) => {
     password: '',
     passwordconfirm: ''
   };
-  const pathname = props.location.pathname.split('=')[1];
-  console.log(pathname);
+
+  const pathname = props.location.search.split('=')[1];
+
   const sweetAlertHandler = (alert) => {
     const MySwal = withReactContent(Swal);
     MySwal.fire({
@@ -43,8 +44,15 @@ const ResetPassword1 = (props) => {
           type: 'success',
           text: 'You should have received a confirmation link that will allow you to change your password!'
         });
+
+        setTimeout(props.history.push('/'), 3000);
       })
       .catch((err) => {
+        sweetAlertHandler({
+          title: 'Error',
+          type: 'success',
+          text: err.message
+        });
         console.log('err', err.message);
       });
   };
@@ -65,6 +73,11 @@ const ResetPassword1 = (props) => {
         });
       })
       .catch((err) => {
+        sweetAlertHandler({
+          title: 'Error',
+          type: 'success',
+          text: err.message
+        });
         console.log('err', err.message);
       });
   };
@@ -135,7 +148,7 @@ const ResetPassword1 = (props) => {
                       </button>
                       <p className="mb-0 text-muted">
                         Don’t have an account?{' '}
-                        <NavLink to="/auth/signup-1" className="f-w-400">
+                        <NavLink to="/auth/signup-4" className="f-w-400">
                           Signup
                         </NavLink>
                       </p>

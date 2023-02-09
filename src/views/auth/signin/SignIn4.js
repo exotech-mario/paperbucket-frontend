@@ -5,7 +5,6 @@ import { connect } from 'react-redux';
 import Breadcrumb from '../../../layouts/AdminLayout/Breadcrumb';
 import lock from '../../../assets/images/user/lock.png';
 import { fetchLogin, fetchLoginSuccess, fetchLoginFailure } from '../../../redux/login/actions';
-
 const Signin4 = (props) => {
   console.log(props);
   const initialState = {
@@ -95,7 +94,7 @@ const Signin4 = (props) => {
                       </button>
 
                       <p className="mb-2 text-muted">
-                        Forgot password? <NavLink to="/auth/reset-password-4">Reset</NavLink>
+                        Forgot password? <NavLink to="/auth/reset-password-1">Reset</NavLink>
                       </p>
                       <p className="mb-0 text-muted">
                         Don’t have an account? <NavLink to="/auth/signup-4">Signup</NavLink>

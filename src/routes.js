@@ -92,6 +92,11 @@ const routes = [
   },
   {
     exact: true,
+    path: '/sign-up-confirm',
+    component: lazy(() => import('./views/auth/signup/SignUpConfirm'))
+  },
+  {
+    exact: true,
     path: '/auth/signin-2',
     component: lazy(() => import('./views/auth/signin/SignIn2'))
   },
@@ -117,8 +122,15 @@ const routes = [
   },
   {
     exact: true,
-    path: '/auth/reset-password-2',
-    component: lazy(() => import('./views/auth/reset-password/ResetPassword2'))
+    path: '/reset',
+    params: '/token',
+    component: lazy(() => import('./views/auth/reset-password/ResetPassword1'))
+  },
+  {
+    exact: false,
+    path: `/auth/reset`,
+    params: '/token=',
+    component: lazy(() => import('./views/auth/reset-password/ResetPassword1'))
   },
   {
     exact: true,

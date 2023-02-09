@@ -11,6 +11,7 @@ import avatar1 from '../../../../assets/images/user/avatar-1.jpg';
 import avatar2 from '../../../../assets/images/user/avatar-2.jpg';
 import avatar3 from '../../../../assets/images/user/avatar-3.jpg';
 import avatar4 from '../../../../assets/images/user/avatar-4.jpg';
+import { change } from 'redux-form';
 
 const NavRight = (props) => {
   const configContext = useContext(ConfigContext);
@@ -27,9 +28,37 @@ const NavRight = (props) => {
     }
   };
 
+  const changeLanguage = (lng) => {
+    console.log('lng');
+  };
   return (
     <React.Fragment>
       <ListGroup as="ul" bsPrefix=" " className="navbar-nav ml-auto" id="navbar-right">
+        <ListGroup.Item as="li" bsPrefix=" ">
+          <Dropdown alignRight={!rtlLayout}>
+            <Dropdown.Toggle as={Link} variant="link" to="#" id="dropdown-basic">
+              <i className="feather icon-globe icon" />
+            </Dropdown.Toggle>
+            <Dropdown.Menu className="notification ">
+              <Dropdown.Item
+                eventKey="1"
+                onClick={() => {
+                  changeLanguage('en');
+                }}
+              >
+                EN
+              </Dropdown.Item>
+              <Dropdown.Item
+                eventKey="2"
+                onClick={() => {
+                  changeLanguage('dk');
+                }}
+              >
+                DK
+              </Dropdown.Item>
+            </Dropdown.Menu>
+          </Dropdown>
+        </ListGroup.Item>
         <ListGroup.Item as="li" bsPrefix=" ">
           <Dropdown alignRight={!rtlLayout}>
             <Dropdown.Toggle as={Link} variant="link" to="#" id="dropdown-basic">

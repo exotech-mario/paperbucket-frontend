@@ -1,22 +1,36 @@
 import React from 'react';
 import axios from 'axios';
-
+import Swal from 'sweetalert2';
+import withReactContent from 'sweetalert2-react-content';
 import { Card, Row, Col } from 'react-bootstrap';
 import { NavLink } from 'react-router-dom';
 
 import Breadcrumb from '../../../layouts/AdminLayout/Breadcrumb';
 
-const ResetPassword1 = () => {
+const ResetPassword1 = (props) => {
   const initialState = {
     isLoading: false,
-    email: ''
+    email: '',
+    password: '',
+    passwordconfirm: ''
+  };
+
+  const pathname = props.location.search.split('=')[1];
+
+  const sweetAlertHandler = (alert) => {
+    const MySwal = withReactContent(Swal);
+    MySwal.fire({
+      title: alert.title,
+      text: alert.text,
+      type: alert.type
+    });
   };
 
   const changeData = (e, input) => {
     initialState[input] = e.target.value;
-
     console.log(initialState);
   };
+
   const fetchUserAxios = async () => {
     await axios
       .post('https://framework.exotech.dk/framework/auth/resetPassword?apikey=x!A%D*G-KaPdSgVkYp3s6v9y/B?E(H+M', {
@@ -25,24 +39,63 @@ const ResetPassword1 = () => {
       })
 
       .then((res) => {
-        console.log('res', res);
-        // const user = res.value;
-        // props.fetchLoginSuccess(user);
+        sweetAlertHandler({
+          title: 'Check your email!',
+          type: 'success',
+          text: 'You should have received a confirmation link that will allow you to change your password!'
+        });
+
+        setTimeout(props.history.push('/'), 3000);
       })
       .catch((err) => {
+        sweetAlertHandler({
+          title: 'Error',
+          type: 'success',
+          text: err.message
+        });
         console.log('err', err.message);
-        // props.fetchLoginFailure(err.message);
       });
   };
+
+  const fetchNewPassword = async () => {
+    await axios
+      .post('https://framework.exotech.dk/framework/auth/resetPassword?apikey=x!A%D*G-KaPdSgVkYp3s6v9y/B?E(H+M', {
+        frameworkGUID: '{AE2536CD-3067-4346-ABDF-37FC17233C8E}',
+        resetToken: pathname,
+        password: initialState.password
+      })
+
+      .then((res) => {
+        sweetAlertHandler({
+          title: 'Check your email!',
+          type: 'success',
+          text: 'You should have received a confirmation link that will allow you to change your password!'
+        });
+      })
+      .catch((err) => {
+        sweetAlertHandler({
+          title: 'Error',
+          type: 'success',
+          text: err.message
+        });
+        console.log('err', err.message);
+      });
+  };
+
   const submitData = () => {
     console.log('submit');
     fetchUserAxios();
-    // console.log(props.error);
+  };
+  const submitNewPassword = () => {
+    if (initialState.password === initialState.passwordconfirm) {
+      fetchNewPassword();
+    }
   };
 
   return (
     <React.Fragment>
       <Breadcrumb />
+      {/* <AdvanceAlert /> */}
       <div className="auth-wrapper">
         <div className="auth-content">
           <div className="auth-bg">
@@ -55,22 +108,52 @@ const ResetPassword1 = () => {
             <Row className="align-items-center text-center">
               <Col>
                 <Card.Body className="card-body">
-                  <div className="mb-4">
-                    <i className="feather icon-mail auth-icon" />
-                  </div>
-                  <h3 className="mb-3 f-w-400">Reset Password</h3>
-                  <div className="input-group mb-4">
-                    <input type="email" className="form-control" placeholder="Email address" onChange={(e) => changeData(e, 'email')} />
-                  </div>
-                  <button className="btn btn-primary mb-4" onClick={submitData}>
-                    Reset password
-                  </button>
-                  <p className="mb-0 text-muted">
-                    Don’t have an account?{' '}
-                    <NavLink to="/auth/signup-1" className="f-w-400">
-                      Signup
-                    </NavLink>
-                  </p>
+                  {pathname ? (
+                    <>
+                      <div className="mb-4">
+                        <i className="feather icon-user-plus auth-icon" />
+                      </div>
+                      <h3 className="mb-3 f-w-400">Reset Password</h3>
+                      <div className="input-group mb-4">
+                        <input
+                          type="password"
+                          className="form-control"
+                          placeholder="Password"
+                          onChange={(e) => changeData(e, 'password')}
+                        />
+                      </div>
+                      <div className="input-group mb-4">
+                        <input
+                          type="password"
+                          className="form-control"
+                          placeholder="Confirm password"
+                          onChange={(e) => changeData(e, 'passwordconfirm')}
+                        />
+                      </div>
+                      <button className="btn btn-primary mb-4" onClick={submitNewPassword}>
+                        Reset password
+                      </button>
+                    </>
+                  ) : (
+                    <>
+                      <div className="mb-4">
+                        <i className="feather icon-mail auth-icon" />
+                      </div>
+                      <h3 className="mb-3 f-w-400">Reset Password</h3>
+                      <div className="input-group mb-4">
+                        <input type="email" className="form-control" placeholder="Email address" onChange={(e) => changeData(e, 'email')} />
+                      </div>
+                      <button className="btn btn-primary mb-4" onClick={submitData}>
+                        Reset password
+                      </button>
+                      <p className="mb-0 text-muted">
+                        Don’t have an account?{' '}
+                        <NavLink to="/auth/signup-4" className="f-w-400">
+                          Signup
+                        </NavLink>
+                      </p>
+                    </>
+                  )}
                 </Card.Body>
               </Col>
             </Row>
